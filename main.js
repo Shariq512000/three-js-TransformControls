@@ -1,6 +1,10 @@
 import * as THREE from "three";
-import {FirstPersonControls} from "three/examples/jsm/controls/FirstPersonControls";
-import {FlyControls} from "three/examples/jsm/controls/FlyControls";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+// import {FirstPersonControls} from "three/examples/jsm/controls/FirstPersonControls";
+// import {FlyControls} from "three/examples/jsm/controls/FlyControls";
+import {TransformControls} from "three/examples/jsm/controls/TransformControls";
+
+
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0.5,0.5,0.5);
@@ -35,13 +39,16 @@ scene.add(gridHelper);
 const clock = new THREE.Clock()
 
 
-const controls = new FirstPersonControls(camera , renderer.domElement);
-controls.movementSpeed = 150;
-controls.lookSpeed = 0.1;
+const controls = new OrbitControls(camera , renderer.domElement);
 
-// const controls = new FlyControls(camera , renderer.domElement);
-// controls.movementSpeed = 1000;
-// controls.rollSpeed = Math.PI / 24;
+const transformControls = new TransformControls(camera , renderer.domElement);
+transformControls.addEventListener('change' , animate);
+transformControls.addEventListener('dragging-changed' , function (event){
+    controls.enabled = ! event.value;
+})
+
+transformControls.attach(cube);
+scene.add(transformControls);
 
 
 animate();
