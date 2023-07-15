@@ -16,17 +16,15 @@ scene.add(ambient);
 
 
 
-const texture = new THREE.TextureLoader().load("texture.jpg");
-const bumpTexture = new THREE.TextureLoader().load("texture3.jpg");
-const geometry = new THREE.BoxGeometry(5 , 5, 5);
+// const texture = new THREE.TextureLoader().load("texture.jpg");
+// const bumpTexture = new THREE.TextureLoader().load("texture3.jpg");
+const geometry = new THREE.SphereGeometry(5 , 32, 32);
 
-const material = new THREE.MeshStandardMaterial({
-    map : texture,
-    bumpMap: bumpTexture,
-    bumpScale: 1,
-    // displacementMap: bumpTexture,
+const material = new THREE.PointsMaterial({
+    color: "red",
+    size: 0.05,
 });
-const cube = new THREE.Mesh( geometry , material );
+const cube = new THREE.Points( geometry , material );
 
 // const cube = new THREE.Line( geometry , material ); if you use Line you don't need wireframe
 
